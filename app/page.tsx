@@ -5,31 +5,23 @@ import { NEXT_PUBLIC_URL } from './config';
 const frameMetadata = getFrameMetadata({
   buttons: [
     {
-      label: 'Story time',
-    },
-    {
-      action: 'tx',
-      label: 'Send Base Sepolia',
-      target: `${NEXT_PUBLIC_URL}/api/tx`,
-      postUrl: `${NEXT_PUBLIC_URL}/api/tx-success`,
+      label: 'Launch Gammabots',
     },
   ],
   image: {
     src: `${NEXT_PUBLIC_URL}/park-3.png`,
     aspectRatio: '1:1',
   },
-  input: {
-    text: 'Tell me a story',
-  },
   postUrl: `${NEXT_PUBLIC_URL}/api/frame`,
 });
 
 export const metadata: Metadata = {
-  title: 'zizzamia.xyz',
-  description: 'LFG',
+  metadataBase: new URL(NEXT_PUBLIC_URL),
+  title: 'Gammabots',
+  description: 'Create bots to trade tokens',
   openGraph: {
-    title: 'zizzamia.xyz',
-    description: 'LFG',
+    title: 'Gammabots',
+    description: 'Create bots to trade tokens',
     images: [`${NEXT_PUBLIC_URL}/park-1.png`],
   },
   other: {
@@ -40,7 +32,7 @@ export const metadata: Metadata = {
 export default function Page() {
   return (
     <>
-      <h1>zizzamia.xyz</h1>
+      <h1>Sorry, Gammabots can only be used in a Farcaster Frame.</h1>
     </>
   );
 }
