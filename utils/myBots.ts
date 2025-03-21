@@ -1,9 +1,21 @@
-import { createCanvas, registerFont } from 'canvas';
-import fs from 'fs';
-import path from 'path';
+import { createCanvas } from 'canvas';
+import { GAMMABOTS_API_KEY, GAMMABOTS_BASE_URL } from '../app/config';
 
 export const myBots = async () => {
-  try {
+  const baseUrl = GAMMABOTS_BASE_URL;
+  const apiKeyToken = GAMMABOTS_API_KEY;
+
+  const url = `${baseUrl}?apikey=${apiKeyToken}`;
+
+  try {  
+    const response = await fetch(url);
+    if (!response.ok) {
+      throw new Error(`Error: ${response.status}`);
+    }
+    const data = await response.json();
+    console.log('Data:', data);
+    //console.log('Data:', data[0].token_symbol);
+    
     const canvas = createCanvas(256, 417);
     const ctx = canvas.getContext('2d');
 
@@ -21,13 +33,11 @@ export const myBots = async () => {
     ctx.textBaseline = 'middle';
 
     // Set text
-    const textCurrent = "Greetings, World!";
+    const textCurrent = data[0].token_symbol;
     ctx.fillText(textCurrent, 100, 180);
 
     const textBuffer = canvas.toBuffer('image/png');
 
-    //return { newImageBuffer: textBuffer }
-    //return { textCurrent, newImageBuffer: textBuffer };
     return textBuffer;
   } catch (error) {
     console.error('Error:', error);
