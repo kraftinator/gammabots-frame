@@ -38,8 +38,8 @@ export const createTextImageAndOverlay = async (currency: string) => {
       .composite([{ input: textBuffer }])
       .toBuffer();
 
-    return { textCurrent, newImageBuffer };
-    //return { textCurrent, newImageBuffer: textBuffer };
+    //return { textCurrent, newImageBuffer };
+    return { textCurrent, newImageBuffer: textBuffer };
   } catch (error) {
     console.error('Error:', error);
     const ethImagePath = path.resolve('./public/ETH.png');
