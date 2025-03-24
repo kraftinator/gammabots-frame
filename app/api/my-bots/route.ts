@@ -1,7 +1,7 @@
 import { FrameRequest, getFrameMessage, getFrameHtmlResponse } from '@coinbase/onchainkit/frame';
 import { NextRequest, NextResponse } from 'next/server';
 import { NEXT_PUBLIC_URL } from '../../config';
-import { myBots } from '../../../utils/myBots';
+import { myBotsView } from '../../components/views/my-bots/myBotsView';
 
 async function getResponse(req: NextRequest): Promise<NextResponse> {
   const body: FrameRequest = await req.json();
@@ -11,7 +11,7 @@ async function getResponse(req: NextRequest): Promise<NextResponse> {
     return new NextResponse('Message not valid', { status: 500 });
   }
 
-  const textBuffer = await myBots();
+  const textBuffer = await myBotsView();
   const base64Image = (textBuffer && textBuffer.toString('base64')) || '';
   const dataUrl = `data:image/png;base64,${base64Image}`;
   

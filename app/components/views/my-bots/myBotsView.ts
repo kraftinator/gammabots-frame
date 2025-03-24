@@ -1,7 +1,7 @@
 import { createCanvas } from 'canvas';
-import { GAMMABOTS_API_KEY, GAMMABOTS_BASE_URL } from '../app/config';
+import { GAMMABOTS_API_KEY, GAMMABOTS_BASE_URL } from '../../../config';
 
-export const myBots = async () => {
+export const myBotsView = async () => {
   const baseUrl = GAMMABOTS_BASE_URL;
   const apiKeyToken = GAMMABOTS_API_KEY;
 
