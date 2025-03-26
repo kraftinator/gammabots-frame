@@ -29,6 +29,8 @@ export const metadata: Metadata = {
   },
 };
 
+console.log('Calling page.tsx');
+
 export default function Page() {
   return (
     <>

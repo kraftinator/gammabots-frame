@@ -3,6 +3,7 @@ import { NextRequest, NextResponse } from 'next/server';
 import { NEXT_PUBLIC_URL } from '../../config';
 
 async function getResponse(req: NextRequest): Promise<NextResponse> {
+  console.log('Calling frame/route.ts');
   const body: FrameRequest = await req.json();
   const { isValid, message } = await getFrameMessage(body, { neynarApiKey: 'NEYNAR_ONCHAIN_KIT' });
 
@@ -39,7 +40,10 @@ async function getResponse(req: NextRequest): Promise<NextResponse> {
       buttons: [
         {
           label: 'Create Bot',
-          //target: `${NEXT_PUBLIC_URL}/api/bracket`,
+          //action: 'tx',
+          target: `${NEXT_PUBLIC_URL}/api/create-bot/start`,
+          //target: `${NEXT_PUBLIC_URL}/api/create-bot`,
+          //postUrl: `${NEXT_PUBLIC_URL}/api/create-bot-success`,
         },
         {
           label: 'My Bots',

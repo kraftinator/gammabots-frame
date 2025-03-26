@@ -5,7 +5,7 @@ export const myBotsView = async () => {
   const baseUrl = GAMMABOTS_BASE_URL;
   const apiKeyToken = GAMMABOTS_API_KEY;
 
-  const url = `${baseUrl}?apikey=${apiKeyToken}`;
+  const url = `${baseUrl}/bots?apikey=${apiKeyToken}`;
 
   try {  
     const response = await fetch(url);
