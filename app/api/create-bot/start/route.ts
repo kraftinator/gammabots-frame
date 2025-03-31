@@ -51,6 +51,7 @@ async function getResponse(req: NextRequest): Promise<NextResponse> {
             label: 'Create Account',
             action: 'tx',
             target: `${NEXT_PUBLIC_URL}/api/create-bot/signup`,
+            postUrl: `${NEXT_PUBLIC_URL}/api/create-bot/signup`,
           },
         ],
         image: {

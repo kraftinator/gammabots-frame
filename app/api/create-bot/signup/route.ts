@@ -11,10 +11,36 @@ async function getResponse(req: NextRequest): Promise<NextResponse> {
     return new NextResponse('Message not valid', { status: 500 });
   }
 
+  console.log('body', body);
+  console.log('message:', message);
+
   const fid = body.untrustedData.fid;
   console.log('fid:', fid);
   if (!fid) {
     return new NextResponse('No transactionId', { status: 500 });
+  }
+
+  const signature = body.untrustedData.transactionId;
+  console.log('signature:', signature);
+
+  if (signature) {
+    try {
+      return new NextResponse(
+        getFrameHtmlResponse({
+          buttons: [
+            {
+              label: 'Account created!',
+            },
+          ],
+          image: {
+            src: `${NEXT_PUBLIC_URL}/park-1.png`,
+          },
+        }),
+      );
+    } catch (error) {
+      console.error('Signature verification failed:', error);
+      return new NextResponse('Signature verification failed', { status: 500 });
+    }
   }
 
   const txData = {
