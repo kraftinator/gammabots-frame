@@ -1,6 +1,21 @@
 import { NextRequest, NextResponse } from 'next/server';
 import { FrameRequest, getFrameMessage,  getFrameHtmlResponse } from '@coinbase/onchainkit/frame';
-import { NEXT_PUBLIC_URL } from '../../../config';
+import { NEXT_PUBLIC_URL, GAMMABOTS_API_KEY, GAMMABOTS_BASE_URL } from '../../../config';
+
+async function createAccountWithSignature(fid: number, signature: string, address: string) {
+  const apikey = GAMMABOTS_API_KEY;
+  
+  const response = await fetch(`${GAMMABOTS_BASE_URL}/users`, {
+    method: 'POST',
+    headers: { 'Content-Type': 'application/json' },
+    body: JSON.stringify({ fid, address, signature, apikey }),
+  });
+  const data = await response.json();
+
+  console.log('data:', data);
+
+  return data;
+}
 
 async function getResponse(req: NextRequest): Promise<NextResponse> {
   console.log('Calling signup/route.ts');
@@ -25,6 +40,14 @@ async function getResponse(req: NextRequest): Promise<NextResponse> {
 
   if (signature) {
     try {
+      const address = message.address // || body.untrustedData.address;
+      if (!address) {
+        return new NextResponse('No address', { status: 500 });
+      }
+      console.log('address:', address);
+      const botWallet = await createAccountWithSignature(fid, signature, address);
+      console.log('botWallet:', botWallet);
+
       return new NextResponse(
         getFrameHtmlResponse({
           buttons: [
